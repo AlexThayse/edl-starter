@@ -1,0 +1,1655 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Travaux pratiques sur les tests unitaires, CI/CD et déploiement">
+      
+      
+        <meta name="author" content="UMONS - Faculté des Sciences">
+      
+      
+      
+        <link rel="prev" href="../TP-1/">
+      
+      
+        <link rel="next" href="../TP-3/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>TP 2 - EDL - Expertises digitale et logicielle</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tp-2-cicd-avec-github-actions" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href=".." title="EDL - Expertises digitale et logicielle" class="md-header__button md-logo" aria-label="EDL - Expertises digitale et logicielle" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            EDL - Expertises digitale et logicielle
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              TP 2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Passer en mode sombre"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer en mode sombre" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Passer en mode clair"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer en mode clair" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/umons-ig/edl-starter" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    umons-ig/edl-starter
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../TP-1/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  TP 1
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  TP 2
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../TP-3/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  TP 3
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="EDL - Expertises digitale et logicielle" class="md-nav__button md-logo" aria-label="EDL - Expertises digitale et logicielle" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    EDL - Expertises digitale et logicielle
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/umons-ig/edl-starter" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    umons-ig/edl-starter
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Accueil
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TP-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TP 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    TP 2
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    TP 2
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objectifs-de-latelier" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Objectifs de l'Atelier
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quest-ce-que-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      📦 Qu'est-ce que CI/CD ?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structure-dun-workflow-github-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Structure d'un Workflow GitHub Actions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercice-1-workflow-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✍️ Exercice 1 : Workflow Backend
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✍️ Exercice 1 : Workflow Backend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objectif" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objectif
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultat-attendu" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Résultat attendu
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercice-2-workflow-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✍️ Exercice 2 : Workflow Frontend
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✍️ Exercice 2 : Workflow Frontend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objectif_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objectif
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instructions_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultat-attendu_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Résultat attendu
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#note-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      💡 Note importante
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercice-3-deboguer-un-echec" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✍️ Exercice 3 : Déboguer un Échec
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✍️ Exercice 3 : Déboguer un Échec">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objectif_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objectif
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instructions_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lecon-apprise" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Leçon apprise
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercice-4-optimiser-avec-le-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✍️ Exercice 4 : Optimiser avec le Cache
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✍️ Exercice 4 : Optimiser avec le Cache">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objectif_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objectif
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instructions_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultat" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Résultat
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercice-5-workflows-reutilisables" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✍️ Exercice 5 : Workflows Réutilisables
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✍️ Exercice 5 : Workflows Réutilisables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objectif_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objectif
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instructions_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultat_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Résultat
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercice-6-separer-tests-unitaires-et-e2e" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✍️ Exercice 6 : Séparer Tests Unitaires et E2E
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✍️ Exercice 6 : Séparer Tests Unitaires et E2E">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objectif_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objectif
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instructions_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultat-attendu_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Résultat attendu
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercice-7-chaine-de-jobs-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✍️ Exercice 7 : Chaîne de Jobs Frontend
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✍️ Exercice 7 : Chaîne de Jobs Frontend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objectif_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objectif
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instructions_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#avantages" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Avantages
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercice-8-badges-de-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✍️ Exercice 8 : Badges de Status
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✍️ Exercice 8 : Badges de Status">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objectif_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objectif
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instructions_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultat_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Résultat
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recapitulatif" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Récapitulatif
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erreurs-frequentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      🐛 Erreurs Fréquentes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🐛 Erreurs Fréquentes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uv-command-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ uv: command not found
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tests-qui-passent-localement-mais-echouent-sur-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ Tests qui passent localement mais échouent sur GitHub
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cache-qui-ne-fonctionne-pas" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ Cache qui ne fonctionne pas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bonus-workflow-java-optionnel" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎁 BONUS : Workflow Java (Optionnel)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎁 BONUS : Workflow Java (Optionnel)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objectif_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objectif
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instructions_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nouveaux-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nouveaux concepts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TP-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TP 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="tp-2-cicd-avec-github-actions">🚀 TP 2 : CI/CD avec GitHub Actions<a class="headerlink" href="#tp-2-cicd-avec-github-actions" title="Permanent link">&para;</a></h1>
+<p><strong>Prérequis :</strong> TP 1 terminé (backend et frontend avec tests)</p>
+<h2 id="objectifs-de-latelier">🎯 Objectifs de l'Atelier<a class="headerlink" href="#objectifs-de-latelier" title="Permanent link">&para;</a></h2>
+<p><strong>Objectif principal :</strong> Automatiser les tests avec GitHub Actions</p>
+<p>À la fin de cet atelier, vous aurez :</p>
+<ol>
+<li>✅ Créé un <strong>workflow backend</strong> qui teste automatiquement votre code Python</li>
+<li>✅ Créé un <strong>workflow frontend</strong> qui teste et build votre code TypeScript</li>
+<li>✅ Compris comment <strong>déboguer</strong> un workflow qui échoue</li>
+<li>✅ Optimisé vos workflows avec le <strong>cache</strong></li>
+<li>✅ Créé des <strong>workflows réutilisables</strong> et des <strong>pipelines CI</strong></li>
+<li>✅ Séparé les <strong>tests rapides</strong> (unitaires) des <strong>tests lents</strong> (E2E)</li>
+<li>✅ Ajouté des <strong>badges de status</strong> à votre README</li>
+</ol>
+<hr />
+<h2 id="quest-ce-que-cicd">📦 Qu'est-ce que CI/CD ?<a class="headerlink" href="#quest-ce-que-cicd" title="Permanent link">&para;</a></h2>
+<p><strong>CI (Continuous Integration) :</strong></p>
+<ul>
+<li>Intégration Continue</li>
+<li>À chaque push, les tests s'exécutent automatiquement</li>
+<li>Détecte les bugs immédiatement</li>
+</ul>
+<p><strong>CD (Continuous Deployment) :</strong></p>
+<ul>
+<li>Déploiement Continu (TP 3)</li>
+<li>Si les tests passent, déploiement automatique</li>
+</ul>
+<p><strong>GitHub Actions :</strong></p>
+<ul>
+<li>Service gratuit de GitHub</li>
+<li>Exécute vos tests sur des serveurs GitHub</li>
+<li>Vérifie chaque commit et pull request</li>
+</ul>
+<hr />
+<h2 id="structure-dun-workflow-github-actions">📚 Structure d'un Workflow GitHub Actions<a class="headerlink" href="#structure-dun-workflow-github-actions" title="Permanent link">&para;</a></h2>
+<p>Un workflow GitHub Actions est un fichier <strong>YAML</strong> dans <code>.github/workflows/</code>.</p>
+<p><strong>Structure de base :</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Mon Workflow</span><span class="w">          </span><span class="c1"># 1️⃣ Nom affiché dans GitHub</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nt">on</span><span class="p">:</span><span class="w">                         </span><span class="c1"># 2️⃣ Quand s&#39;exécute-t-il ?</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nt">jobs</span><span class="p">:</span><span class="w">                       </span><span class="c1"># 3️⃣ Les tâches à faire</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span><span class="nt">test</span><span class="p">:</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span><span class="w">  </span><span class="c1"># 4️⃣ Machine virtuelle</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">                  </span><span class="c1"># 5️⃣ Les étapes</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest</span>
+</code></pre></div>
+<p><strong>Concepts clés :</strong></p>
+<ul>
+<li><strong><code>name</code></strong> : Nom du workflow</li>
+<li><strong><code>on</code></strong> : Déclencheurs (push, pull_request, etc.)</li>
+<li><strong><code>jobs</code></strong> : Tâches parallèles</li>
+<li><strong><code>steps</code></strong> : Étapes séquentielles</li>
+<li><strong><code>uses</code></strong> : Action pré-faite</li>
+<li><strong><code>run</code></strong> : Commande shell</li>
+</ul>
+<hr />
+<h2 id="exercice-1-workflow-backend">✍️ Exercice 1 : Workflow Backend<a class="headerlink" href="#exercice-1-workflow-backend" title="Permanent link">&para;</a></h2>
+<h3 id="objectif">Objectif<a class="headerlink" href="#objectif" title="Permanent link">&para;</a></h3>
+<p>Créer un workflow qui teste automatiquement le backend à chaque push.</p>
+<h3 id="instructions">Instructions<a class="headerlink" href="#instructions" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Créez la structure des workflows :</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>.github/workflows
+</code></pre></div>
+<ol>
+<li>
+<p><strong>Créez le fichier <code>.github/workflows/backend.yml</code></strong></p>
+</li>
+<li>
+<p><strong>Configurez le workflow avec :</strong></p>
+</li>
+<li>Nom : "Backend Tests"</li>
+<li>Déclencheurs : push et pull_request sur <code>main</code></li>
+<li>
+<p>Job nommé "test" qui s'exécute sur <code>ubuntu-latest</code></p>
+</li>
+<li>
+<p><strong>Ajoutez les étapes suivantes (dans l'ordre) :</strong></p>
+</li>
+<li>Récupérer le code avec <code>actions/checkout@v4</code></li>
+<li>Installer Python 3.11 avec <code>actions/setup-python@v5</code></li>
+<li>
+<p>Installer UV :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-LsSf<span class="w"> </span>https://astral.sh/uv/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.cargo/bin&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$GITHUB_PATH</span>
+</code></pre></div>
+</li>
+<li>
+<p>Installer les dépendances : <code>cd backend &amp;&amp; uv sync</code></p>
+</li>
+<li>
+<p>Lancer les tests : <code>cd backend &amp;&amp; uv run pytest -v --cov</code></p>
+</li>
+<li>
+<p><strong>Testez localement avant de pousser :</strong></p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>backend
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>-v<span class="w"> </span>--cov
+</code></pre></div>
+<ol>
+<li><strong>Poussez et vérifiez sur GitHub Actions :</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>git<span class="w"> </span>add<span class="w"> </span>.github/workflows/backend.yml
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;ci: add backend workflow&quot;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div>
+<h3 id="resultat-attendu">✅ Résultat attendu<a class="headerlink" href="#resultat-attendu" title="Permanent link">&para;</a></h3>
+<p>Dans l'onglet "Actions" sur GitHub, vous devriez voir :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>✅ Backend Tests
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  └─ test
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>      ├─ Checkout code
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>      ├─ Setup Python
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>      ├─ Install UV
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>      ├─ Install dependencies
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>      └─ Run tests
+</code></pre></div>
+<hr />
+<h2 id="exercice-2-workflow-frontend">✍️ Exercice 2 : Workflow Frontend<a class="headerlink" href="#exercice-2-workflow-frontend" title="Permanent link">&para;</a></h2>
+<h3 id="objectif_1">Objectif<a class="headerlink" href="#objectif_1" title="Permanent link">&para;</a></h3>
+<p>Créer un workflow qui teste et build le frontend automatiquement.</p>
+<h3 id="instructions_1">Instructions<a class="headerlink" href="#instructions_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Créez le fichier <code>.github/workflows/frontend.yml</code></strong></p>
+</li>
+<li>
+<p><strong>Configurez le workflow similairement au backend :</strong></p>
+</li>
+<li>Nom : "Frontend Tests"</li>
+<li>
+<p>Mêmes déclencheurs que le backend</p>
+</li>
+<li>
+<p><strong>Ajoutez les étapes suivantes :</strong></p>
+</li>
+<li>Récupérer le code</li>
+<li>Installer Node.js 18 avec <code>actions/setup-node@v4</code><ul>
+<li>Activez le cache npm : <code>cache: 'npm'</code></li>
+<li>Spécifiez le chemin : <code>cache-dependency-path: frontend/package-lock.json</code></li>
+</ul>
+</li>
+<li>Installer les dépendances : <code>cd frontend &amp;&amp; npm ci</code></li>
+<li>Lancer les tests : <code>cd frontend &amp;&amp; npm test -- --run</code></li>
+<li>
+<p>Vérifier le build : <code>cd frontend &amp;&amp; npm run build</code></p>
+</li>
+<li>
+<p><strong>Testez localement :</strong></p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">cd</span><span class="w"> </span>frontend
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>npm<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--<span class="w"> </span>--run
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>npm<span class="w"> </span>run<span class="w"> </span>build
+</code></pre></div>
+<ol>
+<li><strong>Poussez et vérifiez :</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>git<span class="w"> </span>add<span class="w"> </span>.github/workflows/frontend.yml
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;ci: add frontend workflow&quot;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div>
+<h3 id="resultat-attendu_1">✅ Résultat attendu<a class="headerlink" href="#resultat-attendu_1" title="Permanent link">&para;</a></h3>
+<p>Vous devriez voir <strong>2 workflows en parallèle</strong> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>✅ Backend Tests
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>✅ Frontend Tests
+</code></pre></div>
+<h3 id="note-importante">💡 Note importante<a class="headerlink" href="#note-importante" title="Permanent link">&para;</a></h3>
+<p><strong><code>npm ci</code> vs <code>npm install</code> :</strong></p>
+<ul>
+<li><code>npm ci</code> : Installe exactement ce qui est dans <code>package-lock.json</code> (déterministe)</li>
+<li><code>npm install</code> : Peut mettre à jour les versions (moins fiable pour CI)</li>
+</ul>
+<hr />
+<h2 id="exercice-3-deboguer-un-echec">✍️ Exercice 3 : Déboguer un Échec<a class="headerlink" href="#exercice-3-deboguer-un-echec" title="Permanent link">&para;</a></h2>
+<h3 id="objectif_2">Objectif<a class="headerlink" href="#objectif_2" title="Permanent link">&para;</a></h3>
+<p>Apprendre à lire les logs et corriger les erreurs de workflow.</p>
+<h3 id="instructions_2">Instructions<a class="headerlink" href="#instructions_2" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Introduisez volontairement un bug dans <code>backend/tests/test_api.py</code> :</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_health_check</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/health&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;BROKEN&quot;</span>  <span class="c1"># ❌ Faux exprès !</span>
+</code></pre></div>
+<ol>
+<li><strong>Poussez le bug :</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>git<span class="w"> </span>add<span class="w"> </span>backend/tests/test_api.py
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;test: intentional failure for learning&quot;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div>
+<ol>
+<li><strong>Observez l'échec sur GitHub Actions :</strong></li>
+<li>Allez dans "Actions"</li>
+<li>Cliquez sur le workflow ❌ rouge</li>
+<li>
+<p>Cliquez sur l'étape "Run tests"</p>
+</li>
+<li>
+<p><strong>Analysez les logs :</strong></p>
+</li>
+<li>Quel test échoue ?</li>
+<li>À quelle ligne ?</li>
+<li>
+<p>Quelle est l'erreur exacte ?</p>
+</li>
+<li>
+<p><strong>Reproduisez localement :</strong></p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">cd</span><span class="w"> </span>backend
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>tests/test_api.py::test_health_check<span class="w"> </span>-v
+</code></pre></div>
+<ol>
+<li><strong>Corrigez le bug :</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;healthy&quot;</span>  <span class="c1"># ✅ Correct</span>
+</code></pre></div>
+<ol>
+<li><strong>Vérifiez localement puis poussez :</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>tests/test_api.py::test_health_check<span class="w"> </span>-v
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>git<span class="w"> </span>add<span class="w"> </span>backend/tests/test_api.py
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;fix: correct health check assertion&quot;</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div>
+<h3 id="lecon-apprise">✅ Leçon apprise<a class="headerlink" href="#lecon-apprise" title="Permanent link">&para;</a></h3>
+<p><strong>Si ça passe localement, ça passera sur GitHub !</strong></p>
+<hr />
+<h2 id="exercice-4-optimiser-avec-le-cache">✍️ Exercice 4 : Optimiser avec le Cache<a class="headerlink" href="#exercice-4-optimiser-avec-le-cache" title="Permanent link">&para;</a></h2>
+<h3 id="objectif_3">Objectif<a class="headerlink" href="#objectif_3" title="Permanent link">&para;</a></h3>
+<p>Réduire le temps d'exécution de 2-3 minutes à ~30 secondes en utilisant le cache.</p>
+<h3 id="instructions_3">Instructions<a class="headerlink" href="#instructions_3" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Modifiez <code>.github/workflows/backend.yml</code></strong></p>
+</li>
+<li>
+<p><strong>Ajoutez une étape de cache APRÈS l'installation de Python :</strong></p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">💾 Cache UV dependencies</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/cache@v4</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span><span class="nt">with</span><span class="p">:</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/.cache/uv</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">    </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ runner.os }}-uv-${{ hashFiles(&#39;backend/pyproject.toml&#39;, &#39;backend/uv.lock&#39;) }}</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">    </span><span class="nt">restore-keys</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">      </span><span class="no">${{ runner.os }}-uv-</span>
+</code></pre></div>
+<ol>
+<li><strong>Comprenez la clé du cache :</strong></li>
+<li><code>${{ runner.os }}</code> : OS (Linux)</li>
+<li><code>${{ hashFiles(...) }}</code> : Hash des fichiers de dépendances</li>
+<li>
+<p>Le cache change seulement si vous ajoutez/retirez une dépendance</p>
+</li>
+<li>
+<p><strong>Testez en poussant deux fois :</strong></p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Premier push - cache vide</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>git<span class="w"> </span>add<span class="w"> </span>.github/workflows/backend.yml
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;ci: add UV cache&quot;</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>git<span class="w"> </span>push
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="c1"># Deuxième push - cache restauré</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;# Test cache&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>README.md
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>git<span class="w"> </span>add<span class="w"> </span>README.md
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;test: trigger workflow&quot;</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>git<span class="w"> </span>push
+</code></pre></div>
+<ol>
+<li><strong>Observez la différence :</strong></li>
+<li>1ère exécution : "Cache not found" → télécharge tout (~2 min)</li>
+<li>2ème exécution : "Cache restored" → utilise le cache (~30 sec)</li>
+</ol>
+<h3 id="resultat">✅ Résultat<a class="headerlink" href="#resultat" title="Permanent link">&para;</a></h3>
+<p><strong>Temps gagné : ~2 minutes par build !</strong> ⚡</p>
+<hr />
+<h2 id="exercice-5-workflows-reutilisables">✍️ Exercice 5 : Workflows Réutilisables<a class="headerlink" href="#exercice-5-workflows-reutilisables" title="Permanent link">&para;</a></h2>
+<h3 id="objectif_4">Objectif<a class="headerlink" href="#objectif_4" title="Permanent link">&para;</a></h3>
+<p>Créer un pipeline CI global qui orchestre backend et frontend.</p>
+<h3 id="instructions_4">Instructions<a class="headerlink" href="#instructions_4" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Rendez vos workflows réutilisables :</strong></li>
+</ol>
+<p>Dans <code>backend.yml</code> et <code>frontend.yml</code>, ajoutez <code>workflow_call</code> aux déclencheurs :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nt">on</span><span class="p">:</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">  </span><span class="nt">workflow_call</span><span class="p">:</span><span class="w">  </span><span class="c1"># ✨ Nouveau !</span>
+</code></pre></div>
+<ol>
+<li><strong>Créez <code>.github/workflows/ci-pipeline.yml</code> :</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CI Pipeline</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="nt">on</span><span class="p">:</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="nt">jobs</span><span class="p">:</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="w">  </span><span class="nt">backend</span><span class="p">:</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Backend Tests</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="w">    </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./.github/workflows/backend.yml</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="w">  </span><span class="nt">frontend</span><span class="p">:</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Frontend Tests</span>
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a><span class="w">    </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./.github/workflows/frontend.yml</span>
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a><span class="w">  </span><span class="nt">summary</span><span class="p">:</span>
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">All Tests Passed</span>
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a><span class="w">    </span><span class="nt">needs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">backend</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">frontend</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a><span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">🎉 Success</span>
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;🎉 Tous les tests sont passés !&quot;</span>
+</code></pre></div>
+<ol>
+<li><strong>Poussez et observez :</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>git<span class="w"> </span>add<span class="w"> </span>.github/workflows/
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;ci: add reusable workflows and pipeline&quot;</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div>
+<h3 id="resultat_1">✅ Résultat<a class="headerlink" href="#resultat_1" title="Permanent link">&para;</a></h3>
+<p>Vous verrez maintenant <strong>3 workflows</strong> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>✅ Backend Tests
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>✅ Frontend Tests
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>✅ CI Pipeline (résumé global)
+</code></pre></div>
+<p>Le job <code>summary</code> attend que backend <strong>ET</strong> frontend soient terminés avant de s'exécuter.</p>
+<hr />
+<h2 id="exercice-6-separer-tests-unitaires-et-e2e">✍️ Exercice 6 : Séparer Tests Unitaires et E2E<a class="headerlink" href="#exercice-6-separer-tests-unitaires-et-e2e" title="Permanent link">&para;</a></h2>
+<h3 id="objectif_5">Objectif<a class="headerlink" href="#objectif_5" title="Permanent link">&para;</a></h3>
+<p>Exécuter les tests rapides (unitaires) sur toutes les branches, mais les tests lents (E2E) seulement sur <code>main</code>.</p>
+<h3 id="instructions_5">Instructions<a class="headerlink" href="#instructions_5" title="Permanent link">&para;</a></h3>
+<p><strong>Partie 1 : Marquer les tests E2E</strong></p>
+<ol>
+<li><strong>Dans <code>backend/tests/conftest.py</code>, ajoutez :</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">pytest_configure</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Enregistre les markers personnalisés&quot;&quot;&quot;</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>    <span class="n">config</span><span class="o">.</span><span class="n">addinivalue_line</span><span class="p">(</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>        <span class="s2">&quot;markers&quot;</span><span class="p">,</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>        <span class="s2">&quot;e2e: mark test as end-to-end test (slow)&quot;</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>    <span class="p">)</span>
+</code></pre></div>
+<ol>
+<li><strong>Dans <code>backend/tests/test_api.py</code>, créez un test E2E :</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">e2e</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_complete_task_lifecycle</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Test E2E : CRUD complet d&#39;une tâche.&quot;&quot;&quot;</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>    <span class="c1"># Créer</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/tasks&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Test E2E&quot;</span><span class="p">,</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Test complet&quot;</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>    <span class="p">})</span>
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span>
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>    <span class="n">task_id</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a>
+<a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a>    <span class="c1"># Lire</span>
+<a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/tasks/</span><span class="si">{</span><span class="n">task_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+<a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a>
+<a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a>    <span class="c1"># Mettre à jour</span>
+<a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/tasks/</span><span class="si">{</span><span class="n">task_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-21-20" name="__codelineno-21-20" href="#__codelineno-21-20"></a>        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Updated&quot;</span><span class="p">,</span>
+<a id="__codelineno-21-21" name="__codelineno-21-21" href="#__codelineno-21-21"></a>        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Modified&quot;</span>
+<a id="__codelineno-21-22" name="__codelineno-21-22" href="#__codelineno-21-22"></a>    <span class="p">})</span>
+<a id="__codelineno-21-23" name="__codelineno-21-23" href="#__codelineno-21-23"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+<a id="__codelineno-21-24" name="__codelineno-21-24" href="#__codelineno-21-24"></a>
+<a id="__codelineno-21-25" name="__codelineno-21-25" href="#__codelineno-21-25"></a>    <span class="c1"># Supprimer</span>
+<a id="__codelineno-21-26" name="__codelineno-21-26" href="#__codelineno-21-26"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/tasks/</span><span class="si">{</span><span class="n">task_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-21-27" name="__codelineno-21-27" href="#__codelineno-21-27"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">204</span>
+<a id="__codelineno-21-28" name="__codelineno-21-28" href="#__codelineno-21-28"></a>
+<a id="__codelineno-21-29" name="__codelineno-21-29" href="#__codelineno-21-29"></a>    <span class="c1"># Vérifier suppression</span>
+<a id="__codelineno-21-30" name="__codelineno-21-30" href="#__codelineno-21-30"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/tasks/</span><span class="si">{</span><span class="n">task_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-21-31" name="__codelineno-21-31" href="#__codelineno-21-31"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span>
+</code></pre></div>
+<ol>
+<li><strong>Testez localement les différentes commandes :</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nb">cd</span><span class="w"> </span>backend
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="c1"># Tests unitaires seulement</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>-v<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;not e2e&quot;</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="c1"># Tests E2E seulement</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>-v<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;e2e&quot;</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="c1"># Tous les tests</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>-v
+</code></pre></div>
+<p><strong>Partie 2 : Créer le workflow séparé</strong></p>
+<ol>
+<li>
+<p><strong>Créez <code>.github/workflows/backend-split.yml</code> avec 2 jobs :</strong></p>
+</li>
+<li>
+<p><strong>Job 1 : unit-tests</strong> (toujours)</p>
+<ul>
+<li>Exécute : <code>pytest -v -m "not e2e"</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Job 2 : e2e-tests</strong> (seulement sur main)</p>
+<ul>
+<li>Ajoute la condition : <code>if: github.ref == 'refs/heads/main'</code></li>
+<li>Exécute : <code>pytest -v -m "e2e"</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Testez avec une Pull Request :</strong></p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>test/split-tests
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;# Test&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>README.md
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>git<span class="w"> </span>add<span class="w"> </span>.
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;test: verify E2E don&#39;t run on PR&quot;</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>test/split-tests
+</code></pre></div>
+<h3 id="resultat-attendu_2">✅ Résultat attendu<a class="headerlink" href="#resultat-attendu_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Sur PR</strong> : Seulement "Unit Tests" s'exécute</li>
+<li><strong>Sur main</strong> : "Unit Tests" <strong>ET</strong> "E2E Tests" s'exécutent</li>
+</ul>
+<hr />
+<h2 id="exercice-7-chaine-de-jobs-frontend">✍️ Exercice 7 : Chaîne de Jobs Frontend<a class="headerlink" href="#exercice-7-chaine-de-jobs-frontend" title="Permanent link">&para;</a></h2>
+<h3 id="objectif_6">Objectif<a class="headerlink" href="#objectif_6" title="Permanent link">&para;</a></h3>
+<p>Créer une chaîne Lint → Test → Build pour optimiser le feedback.</p>
+<h3 id="instructions_6">Instructions<a class="headerlink" href="#instructions_6" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Créez <code>.github/workflows/frontend-chain.yml</code> avec 3 jobs :</strong></li>
+</ol>
+<p><strong>Job 1 : lint</strong>
+   - Installe les dépendances
+   - Exécute : <code>npm run lint</code></p>
+<p><strong>Job 2 : test</strong>
+   - Dépend de <code>lint</code> avec <code>needs: lint</code>
+   - Installe les dépendances
+   - Exécute : <code>npm test -- --run</code></p>
+<p><strong>Job 3 : build</strong>
+   - Dépend de <code>test</code> avec <code>needs: test</code>
+   - Installe les dépendances
+   - Exécute : <code>npm run build</code>
+   - Upload les artifacts avec <code>actions/upload-artifact@v4</code> :</p>
+<div class="highlight"><pre><span></span><code> ```yaml
+ - name: 📤 Upload build artifacts
+   uses: actions/upload-artifact@v4
+   with:
+     name: frontend-build
+     path: frontend/dist/
+ ```
+</code></pre></div>
+<ol>
+<li><strong>Poussez et observez :</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>git<span class="w"> </span>add<span class="w"> </span>.github/workflows/frontend-chain.yml
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;ci: add frontend chain&quot;</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div>
+<h3 id="avantages">✅ Avantages<a class="headerlink" href="#avantages" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Si lint échoue → tests et build ne s'exécutent pas</li>
+<li>Feedback plus rapide (lint = 10s vs build = 2min)</li>
+<li>Build artifacts disponibles pour téléchargement</li>
+</ul>
+<hr />
+<h2 id="exercice-8-badges-de-status">✍️ Exercice 8 : Badges de Status<a class="headerlink" href="#exercice-8-badges-de-status" title="Permanent link">&para;</a></h2>
+<h3 id="objectif_7">Objectif<a class="headerlink" href="#objectif_7" title="Permanent link">&para;</a></h3>
+<p>Afficher le statut des workflows dans votre README.</p>
+<h3 id="instructions_7">Instructions<a class="headerlink" href="#instructions_7" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Modifiez <code>README.md</code> et ajoutez au début :</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="gh"># TaskFlow API</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>![<span class="nt">Backend Tests</span>](<span class="na">https://github.com/VOTRE_NOM/VOTRE_REPO/workflows/Backend%20Tests/badge.svg</span>)
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>![<span class="nt">Frontend Tests</span>](<span class="na">https://github.com/VOTRE_NOM/VOTRE_REPO/workflows/Frontend%20Tests/badge.svg</span>)
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>![<span class="nt">CI Pipeline</span>](<span class="na">https://github.com/VOTRE_NOM/VOTRE_REPO/workflows/CI%20Pipeline/badge.svg</span>)
+</code></pre></div>
+<ol>
+<li><strong>Remplacez :</strong></li>
+<li><code>VOTRE_NOM</code> → Votre username GitHub</li>
+<li>
+<p><code>VOTRE_REPO</code> → Nom de votre repo</p>
+</li>
+<li>
+<p><strong>Poussez :</strong></p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>git<span class="w"> </span>add<span class="w"> </span>README.md
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;docs: add CI badges&quot;</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div>
+<h3 id="resultat_2">✅ Résultat<a class="headerlink" href="#resultat_2" title="Permanent link">&para;</a></h3>
+<p>Sur GitHub, vous verrez des badges qui se mettent à jour automatiquement :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>✅ Backend Tests  ✅ Frontend Tests  ✅ CI Pipeline
+</code></pre></div>
+<hr />
+<h2 id="recapitulatif">📋 Récapitulatif<a class="headerlink" href="#recapitulatif" title="Permanent link">&para;</a></h2>
+<p>Félicitations ! Vous avez maintenant :</p>
+<p>✅ <strong>Exercice 1</strong> : Workflow backend automatisé
+✅ <strong>Exercice 2</strong> : Workflow frontend automatisé
+✅ <strong>Exercice 3</strong> : Compétences en débogage de workflows
+✅ <strong>Exercice 4</strong> : Cache UV pour optimiser les builds
+✅ <strong>Exercice 5</strong> : Pipeline CI global avec workflows réutilisables
+✅ <strong>Exercice 6</strong> : Séparation tests unitaires / E2E
+✅ <strong>Exercice 7</strong> : Chaîne de jobs frontend optimisée
+✅ <strong>Exercice 8</strong> : Badges de status dans le README</p>
+<p><strong>Temps total estimé :</strong> 4-5 heures</p>
+<hr />
+<h2 id="erreurs-frequentes">🐛 Erreurs Fréquentes<a class="headerlink" href="#erreurs-frequentes" title="Permanent link">&para;</a></h2>
+<h3 id="uv-command-not-found">❌ <code>uv: command not found</code><a class="headerlink" href="#uv-command-not-found" title="Permanent link">&para;</a></h3>
+<p><strong>Cause :</strong> UV n'est pas dans le PATH
+<strong>Solution :</strong> Ajoutez <code>echo "$HOME/.cargo/bin" &gt;&gt; $GITHUB_PATH</code></p>
+<h3 id="tests-qui-passent-localement-mais-echouent-sur-github">❌ Tests qui passent localement mais échouent sur GitHub<a class="headerlink" href="#tests-qui-passent-localement-mais-echouent-sur-github" title="Permanent link">&para;</a></h3>
+<p><strong>Causes possibles :</strong></p>
+<ol>
+<li>Variable d'environnement manquante</li>
+<li>Dépendance système manquante</li>
+<li>Timezone différente</li>
+</ol>
+<p><strong>Déboguer :</strong> Reproduisez exactement les mêmes commandes localement</p>
+<h3 id="cache-qui-ne-fonctionne-pas">❌ Cache qui ne fonctionne pas<a class="headerlink" href="#cache-qui-ne-fonctionne-pas" title="Permanent link">&para;</a></h3>
+<p><strong>Cause :</strong> Mauvaise clé de cache
+<strong>Solution :</strong> Vérifiez que <code>hashFiles()</code> pointe vers les bons fichiers</p>
+<hr />
+<h2 id="bonus-workflow-java-optionnel">🎁 BONUS : Workflow Java (Optionnel)<a class="headerlink" href="#bonus-workflow-java-optionnel" title="Permanent link">&para;</a></h2>
+<p><strong>Pour les étudiants qui ont fait les exercices Java du TP 1.</strong></p>
+<h3 id="objectif_8">Objectif<a class="headerlink" href="#objectif_8" title="Permanent link">&para;</a></h3>
+<p>Tester automatiquement les 3 projets Java (calculator, string-utils, bank-account).</p>
+<h3 id="instructions_8">Instructions<a class="headerlink" href="#instructions_8" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Créez <code>.github/workflows/java.yml</code> :</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Java Tests (Optional)</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="nt">on</span><span class="p">:</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;java-exercises/**&#39;</span>
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a><span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
+<a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;java-exercises/**&#39;</span>
+<a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a><span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span>
+<a id="__codelineno-29-13" name="__codelineno-29-13" href="#__codelineno-29-13"></a>
+<a id="__codelineno-29-14" name="__codelineno-29-14" href="#__codelineno-29-14"></a><span class="nt">jobs</span><span class="p">:</span>
+<a id="__codelineno-29-15" name="__codelineno-29-15" href="#__codelineno-29-15"></a><span class="w">  </span><span class="nt">test</span><span class="p">:</span>
+<a id="__codelineno-29-16" name="__codelineno-29-16" href="#__codelineno-29-16"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Test Java Exercises</span>
+<a id="__codelineno-29-17" name="__codelineno-29-17" href="#__codelineno-29-17"></a><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<a id="__codelineno-29-18" name="__codelineno-29-18" href="#__codelineno-29-18"></a>
+<a id="__codelineno-29-19" name="__codelineno-29-19" href="#__codelineno-29-19"></a><span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-29-20" name="__codelineno-29-20" href="#__codelineno-29-20"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">📥 Checkout code</span>
+<a id="__codelineno-29-21" name="__codelineno-29-21" href="#__codelineno-29-21"></a><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+<a id="__codelineno-29-22" name="__codelineno-29-22" href="#__codelineno-29-22"></a>
+<a id="__codelineno-29-23" name="__codelineno-29-23" href="#__codelineno-29-23"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">☕ Setup Java</span>
+<a id="__codelineno-29-24" name="__codelineno-29-24" href="#__codelineno-29-24"></a><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-java@v4</span>
+<a id="__codelineno-29-25" name="__codelineno-29-25" href="#__codelineno-29-25"></a><span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<a id="__codelineno-29-26" name="__codelineno-29-26" href="#__codelineno-29-26"></a><span class="w">          </span><span class="nt">distribution</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;temurin&#39;</span>
+<a id="__codelineno-29-27" name="__codelineno-29-27" href="#__codelineno-29-27"></a><span class="w">          </span><span class="nt">java-version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;17&#39;</span>
+<a id="__codelineno-29-28" name="__codelineno-29-28" href="#__codelineno-29-28"></a>
+<a id="__codelineno-29-29" name="__codelineno-29-29" href="#__codelineno-29-29"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">🧮 Test Calculator</span>
+<a id="__codelineno-29-30" name="__codelineno-29-30" href="#__codelineno-29-30"></a><span class="w">        </span><span class="nt">working-directory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">java-exercises/calculator</span>
+<a id="__codelineno-29-31" name="__codelineno-29-31" href="#__codelineno-29-31"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-29-32" name="__codelineno-29-32" href="#__codelineno-29-32"></a><span class="w">          </span><span class="no">javac -cp .:../lib/junit-4.13.2.jar:../lib/hamcrest-core-1.3.jar *.java</span>
+<a id="__codelineno-29-33" name="__codelineno-29-33" href="#__codelineno-29-33"></a><span class="w">          </span><span class="no">java -cp .:../lib/junit-4.13.2.jar:../lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore CalculatorTest</span>
+<a id="__codelineno-29-34" name="__codelineno-29-34" href="#__codelineno-29-34"></a>
+<a id="__codelineno-29-35" name="__codelineno-29-35" href="#__codelineno-29-35"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">📝 Test String Utils</span>
+<a id="__codelineno-29-36" name="__codelineno-29-36" href="#__codelineno-29-36"></a><span class="w">        </span><span class="nt">working-directory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">java-exercises/string-utils</span>
+<a id="__codelineno-29-37" name="__codelineno-29-37" href="#__codelineno-29-37"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-29-38" name="__codelineno-29-38" href="#__codelineno-29-38"></a><span class="w">          </span><span class="no">javac -cp .:../lib/junit-4.13.2.jar:../lib/hamcrest-core-1.3.jar *.java</span>
+<a id="__codelineno-29-39" name="__codelineno-29-39" href="#__codelineno-29-39"></a><span class="w">          </span><span class="no">java -cp .:../lib/junit-4.13.2.jar:../lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore StringUtilsTest</span>
+<a id="__codelineno-29-40" name="__codelineno-29-40" href="#__codelineno-29-40"></a>
+<a id="__codelineno-29-41" name="__codelineno-29-41" href="#__codelineno-29-41"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">🏦 Test Bank Account</span>
+<a id="__codelineno-29-42" name="__codelineno-29-42" href="#__codelineno-29-42"></a><span class="w">        </span><span class="nt">working-directory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">java-exercises/bank-account</span>
+<a id="__codelineno-29-43" name="__codelineno-29-43" href="#__codelineno-29-43"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-29-44" name="__codelineno-29-44" href="#__codelineno-29-44"></a><span class="w">          </span><span class="no">javac -cp .:../lib/junit-4.13.2.jar:../lib/hamcrest-core-1.3.jar *.java</span>
+<a id="__codelineno-29-45" name="__codelineno-29-45" href="#__codelineno-29-45"></a><span class="w">          </span><span class="no">java -cp .:../lib/junit-4.13.2.jar:../lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore BankAccountTest</span>
+</code></pre></div>
+<h3 id="nouveaux-concepts">Nouveaux concepts<a class="headerlink" href="#nouveaux-concepts" title="Permanent link">&para;</a></h3>
+<p><strong><code>paths:</code> - Déclenchement conditionnel</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="nt">on</span><span class="p">:</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;java-exercises/**&#39;</span>
+</code></pre></div>
+<p>Le workflow ne s'exécute que si vous modifiez des fichiers Java.</p>
+<p><strong><code>workflow_dispatch:</code> - Lancement manuel</strong>
+Vous pouvez lancer le workflow manuellement depuis l'onglet Actions.</p>
+<p><strong><code>working-directory:</code> - Répertoire de travail</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Test Calculator</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">  </span><span class="nt">working-directory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">java-exercises/calculator</span>
+</code></pre></div>
+<p>Plus propre que d'utiliser <code>cd</code> dans chaque commande.</p>
+<h3 id="test">Test<a class="headerlink" href="#test" title="Permanent link">&para;</a></h3>
+<p><strong>Option 1 : Modifier un fichier Java</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;// Test CI&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>java-exercises/calculator/Calculator.java
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>git<span class="w"> </span>add<span class="w"> </span>java-exercises/
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;test: trigger Java workflow&quot;</span>
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>git<span class="w"> </span>push
+</code></pre></div>
+<p><strong>Option 2 : Lancement manuel</strong></p>
+<ol>
+<li>Allez dans "Actions" → "Java Tests (Optional)"</li>
+<li>Cliquez sur "Run workflow"</li>
+<li>Sélectionnez "main" et cliquez "Run workflow"</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.top", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
