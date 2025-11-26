@@ -3,19 +3,18 @@ name: Backend Tests
 on:
   push:
     branches: [main]
-  pull_request:     # Nouveau : se lance sur les PR
+  pull_request:
     branches: [main]
-  workflow_call:    # Nouveau : permet d'être appelé par un autre workflow
+  workflow_call:
 
 jobs:
-  test:
+  # JOB 1 : Tests rapides (toujours exécutés)
+  unit-tests:
+    name: Unit Tests
     runs-on: ubuntu-latest
-    
-    # Définit le dossier par défaut pour toutes les commandes 'run'
     defaults:
       run:
         working-directory: ./backend
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -24,15 +23,45 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip' # Active le cache pour l'installation de base
+          cache: 'pip'
 
       - name: Install UV
         run: pip install uv
 
       - name: Install dependencies
-        # uv sync crée l'environnement virtuel et installe les dépendances
         run: uv sync
 
-      - name: Run tests
-        # 'uv run' exécute la commande dans l'environnement virtuel créé par uv
-        run: uv run pytest
+      # Notez l'option -m "not e2e"
+      - name: Run unit tests only
+        run: uv run pytest -v -m "not e2e"
+
+  # JOB 2 : Tests lents (Seulement sur MAIN)
+  e2e-tests:
+    name: E2E Tests
+    runs-on: ubuntu-latest
+    # CONDITION : Ne tourne que sur la branche 'main'
+    if: github.ref == 'refs/heads/main'
+    # DÉPENDANCE : Attend que les tests unitaires soient OK
+    needs: unit-tests
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install UV
+        run: pip install uv
+
+      - name: Install dependencies
+        run: uv sync
+
+      # Notez l'option -m "e2e"
+      - name: Run E2E tests only
+        run: uv run pytest -v -m "e2e"
