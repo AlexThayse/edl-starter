@@ -1,3 +1,7 @@
+![Backend Tests](https://github.com/AlexThayse/edl-starter/actions/workflows/backend.yml/badge.svg)
+![Frontend Tests](https://github.com/AlexThayse/edl-starter/actions/workflows/frontend.yml/badge.svg)
+![CI Pipeline](https://github.com/AlexThayse/edl-starter/actions/workflows/ci-pipeline.yml/badge.svg)
+
 # 🚀 EDL Starter - Code de Démarrage
 
 Bienvenue dans le code de démarrage pour les ateliers d'Environnement de Développement Logiciel (EDL) !
