@@ -1,30 +1,26 @@
 services:
-  # ----------------------------------------
-  # Backend FastAPI (Web Service)
-  # ----------------------------------------
+  # Backend FastAPI
   - type: web
     name: taskflow-backend
     runtime: python
     region: frankfurt
-    plan: free            # "free" est correct pour un Web Service
+    plan: free
     buildCommand: pip install uv && uv sync
     startCommand: uv run uvicorn src.app:app --host 0.0.0.0 --port $PORT
     rootDir: backend
     envVars:
       - key: DATABASE_URL
-        sync: false
+        sync: false # Configuré manuellement dans le dashboard
       - key: CORS_ORIGINS
         sync: false
     healthCheckPath: /health
 
-  # ----------------------------------------
-  # Frontend React (Static Site)
-  # ----------------------------------------
+  # Frontend React
   - type: web
     name: taskflow-frontend
     runtime: static
-    # region: frankfurt   <-- Toujours supprimé (pas de région pour le statique)
-    plan: starter         # <-- REMPLACEZ 'free' PAR 'starter' ICI
+    region: frankfurt
+    plan: free
     buildCommand: npm ci && npm run build
     staticPublishPath: ./dist
     rootDir: frontend
