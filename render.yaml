@@ -1,10 +1,12 @@
 services:
-  # Backend FastAPI (Web Service -> A besoin d'une région)
+  # ----------------------------------------
+  # Backend FastAPI (Web Service)
+  # ----------------------------------------
   - type: web
     name: taskflow-backend
     runtime: python
     region: frankfurt
-    plan: free
+    plan: free            # "free" est correct pour un Web Service
     buildCommand: pip install uv && uv sync
     startCommand: uv run uvicorn src.app:app --host 0.0.0.0 --port $PORT
     rootDir: backend
@@ -15,12 +17,14 @@ services:
         sync: false
     healthCheckPath: /health
 
-  # Frontend React (Static Site -> PAS de région)
+  # ----------------------------------------
+  # Frontend React (Static Site)
+  # ----------------------------------------
   - type: web
     name: taskflow-frontend
     runtime: static
-    # region: frankfurt  <-- LIGNE SUPPRIMÉE ICI
-    plan: free
+    # region: frankfurt   <-- Toujours supprimé (pas de région pour le statique)
+    plan: starter         # <-- REMPLACEZ 'free' PAR 'starter' ICI
     buildCommand: npm ci && npm run build
     staticPublishPath: ./dist
     rootDir: frontend
