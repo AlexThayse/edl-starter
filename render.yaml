@@ -1,5 +1,5 @@
 services:
-  # Backend FastAPI
+  # Backend FastAPI (Web Service -> A besoin d'une région)
   - type: web
     name: taskflow-backend
     runtime: python
@@ -10,16 +10,16 @@ services:
     rootDir: backend
     envVars:
       - key: DATABASE_URL
-        sync: false # Configuré manuellement dans le dashboard
+        sync: false
       - key: CORS_ORIGINS
         sync: false
     healthCheckPath: /health
 
-  # Frontend React
+  # Frontend React (Static Site -> PAS de région)
   - type: web
     name: taskflow-frontend
     runtime: static
-    region: frankfurt
+    # region: frankfurt  <-- LIGNE SUPPRIMÉE ICI
     plan: free
     buildCommand: npm ci && npm run build
     staticPublishPath: ./dist
